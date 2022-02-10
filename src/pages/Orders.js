@@ -19,8 +19,7 @@ export default function Orders() {
         <div>
             {orders.map((order) =>
                 <div key={order.order_details}>
-                    <p>{order.id}</p>
-                    <p>{order.order_details}</p>
+           
                 </div>
             )}
         </div>
