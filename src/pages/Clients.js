@@ -1,36 +1,14 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+
+import AddClient from "../components/addClient";
+import ShowClient from "../components/showClient";
+
 const Clients = () => {
-    const baseURL = "http://localhost:3000/clients";
-    const [clients, setClients] = useState(null);
-
-    async function takeData() {
-        const response = await axios({
-            url: baseURL,
-            method: "GET"
-        })
-        setClients(response.data)
-        const data = response.data
-        console.log(data)
-        return data.data.name
-    }
-
-    useEffect(() => {
-        takeData()
-    }, []);
-
-    return (
-        <div>
-            {clients && clients.map((client) => {
-                return (
-                    <div key={client.id}>
-                        <p>{client.name}</p>
-                    </div>
-                )
-            })}
-        </div>
-    );
-}
-
+  return (
+    <div>
+      <ShowClient />
+      <AddClient />
+      </div>
+  );
+};
 
 export default Clients;

@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Table from "@mui/material/Table";
@@ -6,45 +7,50 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import NavBar from "../basicComponents/navBar";
+import Clients from "./../pages/Clients"
 
-const Orders = () => {
-  const baseURL = "http://localhost:3000/order";
-  const [orders, setOrders] = useState(null);
+const ShowClient = () => {
+  const baseURL = "http://localhost:3000/clients";
+  const [clients, setClients] = useState(null);
 
   async function takeData() {
     const response = await axios({
       url: baseURL,
       method: "GET",
-    })
-    .then((response => {
-    setOrders(response.data)
-    const data = response.data
-    console.log(data)
-    return data
-  }))}
+    }).then((response) => {
+      setClients(response.data);
+      const data = response;
+      console.log(data);
+      return data;
+    });
+  }
 
   useEffect(() => {
     takeData();
-  }, []);
+  }, [takeData]);
 
   return (
-    <>
+    <div>
       <TableContainer>
         <Table>
           <TableBody>
             <TableRow>
               <TableCell></TableCell>
-              <TableCell>Id zamówienia</TableCell>
-              <TableCell>Szczegóły zamówienia</TableCell>
+              <TableCell>Id klienta</TableCell>
+              <TableCell>Imię klienta</TableCell>
+              <TableCell>Nazwisko klienta</TableCell>
+              <TableCell>Email klienta</TableCell>
               <TableCell></TableCell>
             </TableRow>
-            {orders &&
-              orders.map((order) => {
+            {clients &&
+              clients.map((client) => {
                 return (
-                  <TableRow key={order.order_details}>
+                  <TableRow key={client.id}>
                     <TableCell></TableCell>
-                    <TableCell>{order.id}</TableCell>
-                    <TableCell>{order.order_details}</TableCell>
+                    <TableCell>{client.id}</TableCell>
+                    <TableCell>{client.name}</TableCell>
+                    <TableCell>{client.surname}</TableCell>
+                    <TableCell>{client.email}</TableCell>
                     <TableCell><NavBar /></TableCell>
                   </TableRow>
                 );
@@ -52,8 +58,8 @@ const Orders = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </>
+    </div>
   );
 };
 
-export default Orders;
+export default ShowClient;
