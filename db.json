@@ -14,19 +14,13 @@
       "id": 1,
       "name": "Adam",
       "surname": "Jochemczyk",
-      "email": "mymail@gmail.com"
+      "email": "aj@wp.pl"
     },
     {
       "id": 2,
-      "name": "wwwwwwww",
-      "surname": "eeee",
-      "email": "qqqqqqq"
-    },
-    {
-      "id": 3,
-      "name": "ssssssssssss",
-      "surname": "tttttttttttttttt",
-      "email": "iiiiiiiiiiiii"
+      "name": "joanna.walach@op.pl",
+      "surname": "joanna.walach@op.pl",
+      "email": "joanna.walach@op.pl"
     }
   ]
 }

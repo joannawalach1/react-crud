@@ -1,24 +1,31 @@
-import {useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import axios from 'axios';
 
-const RemoveClient = () => {
+const RemoveClient = (e) => {
     const baseURL = "http://localhost:3000/clients";
+     const [clients, setClients] = useState();
 
-    async function removeClient(id) {
+    async function RemoveClient(id) { 
         const post = await axios({
-            url: baseURL,
+            url: baseURL+`/${id}`,
             method: "DELETE",
-            data: ""
         }).then((response) => {
-            console.log(response.data);
+            alert(e.target.id)
+            setClients(response.data)
+            console.log(response.status)
+            return id;
         })
-            .catch((error) => {
-                console.log(error)
-            })
+          // .catch((error) => {
+          // console.log(error)
+          // })
   } 
-    useEffect((id) => {
-        RemoveClient(id);
-    }, [])
-}
+useEffect((id) => {
+  RemoveClient(id)
+}, [])
+
+
+return (
+    <div></div>
+)}
  
 export default RemoveClient;
