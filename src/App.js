@@ -13,9 +13,9 @@ function App() {
     <BrowserRouter>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h3">
-            <Link to="/orders">Orders</Link>
-            <Link to="/clients">Clients</Link>
+          <Typography variant="h5" >
+            <Link to="/orders" className="links">Orders</Link>
+            <Link to="/clients" className="links">Clients</Link>
             <IconButton color="info">
               <AddIcon fontSize="medium"  />
             </IconButton>

@@ -10,16 +10,16 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const ShowClient = () => {
-    const baseURL = "http://localhost:3000/clients";
-    const [clients, setClients] = useState(null);
-    
+const ShowOrder = () => {
+    const baseURL = "http://localhost:3000/order";
+    const [orders, setOrders] = useState(null);
+
     async function takeData() {
         await axios({
             url: baseURL,
             method: "GET",
         }).then((response) =>
-            setClients(response.data)
+            setOrders(response.data)
         );
     }
 
@@ -28,11 +28,11 @@ const ShowClient = () => {
     }, [takeData]);
 
     const deleteData = async id => {
-        await axios.delete(`http://localhost:3000/clients/${id}`);
-        var newclient = clients.filter((item) => {
+        await axios.delete(`http://localhost:3000/order/${id}`);
+        var neworder = orders.filter((item) => {
             return item.id !== id;
         })
-        setClients(newclient);
+        setOrders(neworder);
     }
 
     return (
@@ -42,25 +42,21 @@ const ShowClient = () => {
                     <TableBody>
                         <TableRow>
                             <TableCell></TableCell>
-                            <TableCell>Id klienta</TableCell>
-                            <TableCell>Imię klienta</TableCell>
-                            <TableCell>Nazwisko klienta</TableCell>
-                            <TableCell>Email klienta</TableCell>
+                            <TableCell>Id zamówienia</TableCell>
+                            <TableCell>Zakupiony produkt</TableCell>
                             <TableCell></TableCell>
                         </TableRow>
-                        {clients &&
-                            clients.map((client, index) => {
+                        {orders &&
+                            orders.map((order,index) => {
                                 return (
                                     <TableRow key={index}>
                                         <TableCell></TableCell>
-                                        <TableCell>{client.id}</TableCell>
-                                        <TableCell>{client.name}</TableCell>
-                                        <TableCell>{client.surname}</TableCell>
-                                        <TableCell>{client.email}</TableCell>
+                                        <TableCell>{order.id}</TableCell>
+                                        <TableCell>{order.order_details}</TableCell>
                                         <TableCell>
                                             <IconButton id="view" variant="contained" color="warning"><VisibilityIcon color="primary" /></IconButton>
                                             <IconButton id="edit" variant="contained" color="info"><EditIcon /></IconButton>
-                                            <IconButton id="remove" variant="contained" color="secondary" onClick={() => deleteData(client.id)}><DeleteIcon color="secondary" /></IconButton>
+                                            <IconButton id="remove" variant="contained" color="secondary" onClick={() => deleteData(order.id)}><DeleteIcon color="secondary" /></IconButton>
                                         </TableCell>
                                     </TableRow>
                                 );
@@ -73,4 +69,4 @@ const ShowClient = () => {
 }
 
 
-export default ShowClient;
+export default ShowOrder;

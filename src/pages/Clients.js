@@ -7,6 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Input from "@mui/material/Input";
 import Button from "@mui/material/Button";
 
+
 const Clients = () => {
   const baseURL = "http://localhost:3000/clients";
   const [id] = useState("");
@@ -15,55 +16,48 @@ const Clients = () => {
   const [email, setEmail] = useState("");
 
   async function addData(e) {
-      const post = await axios({
-          url: baseURL,
-          method: "POST",
-          data: {
-              id,
-              name: name,
-              surname: surname,
-              email: email,
-          },
-      })
-          .then((response) => {
+    const post = await axios({
+      url: baseURL,
+      method: "POST",
+      data: {
+        id,
+        name: name,
+        surname: surname,
+        email: email,
+      },
+    })
+      .then((response) => {
 
-              console.log(response);
-          })
-          .catch((error) => {
-              console.log(error);
-          });
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   useEffect(() => {
-      addData();
+    addData();
   }, []);
-
-  function takingInputs(e) {
-    setName(e.target.value)
-    setSurname(e.target.value)
-    setEmail(e.target.value)
-}
 
   return (
     <div>
-      <div>
-          <h2> Add a new Client</h2>
-          <Container style={{ width: 300 }}>
-              <FormGroup>
-                  <InputLabel htmlFor="name">Imię klienta</InputLabel>
-                  <Input id="name" onChange={e => takingInputs(e)} />
-                  <InputLabel htmlFor="surname">Nazwisko klienta</InputLabel>
-                  <Input id="nazwisko" onChange={e => takingInputs(e)} />
-                  <InputLabel htmlFor="email">Email klienta</InputLabel>
-                  <Input id="email" onChange={e => takingInputs(e)} />
-                  <div>
-                      <Button type="submit" size="large" onClick={addData} style={{ width: 100 }}>Wyślij</Button>
-                      <Button type="submit" size="large" style={{ width: 100 }}>Cancel</Button>
-                  </div>
-              </FormGroup></Container>
-      </div>
-      <ShowClient />
-      <div>
-      </div></div>
+      <h2> Add a new Client</h2>
+      <Container style={{ width: 300 }}>
+        <FormGroup>
+          <InputLabel htmlFor="name">Imię klienta</InputLabel>
+          <Input id="name" onChange={(e) => setName(e.target.value)} />
+          <InputLabel htmlFor="surname">Nazwisko klienta</InputLabel>
+          <Input id="nazwisko" onChange={(e) => setSurname(e.target.value)} />
+          <InputLabel htmlFor="email">Email klienta</InputLabel>
+          <Input id="email" onChange={(e) => setEmail(e.target.value)} />
+          <div>
+            <Button type="submit" size="large" onClick={addData} style={{ width: 100 }}>Wyślij</Button>
+            <Button type="submit" size="large" style={{ width: 100 }}>Cancel</Button>
+          </div>
+        </FormGroup></Container>
+
+      <div><ShowClient /></div>
+      
+    </div>
   );
 };
 
